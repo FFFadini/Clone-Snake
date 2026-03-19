@@ -19,7 +19,7 @@ const finalScoreEl    = document.getElementById('final-score');
 const restartBtn      = document.getElementById('restart-btn');
 const startBtn        = document.getElementById('start-btn');
 
-// --- PALETA NEON ---
+// --- PALETA NEON (espelha o Tetris) ---
 const COLOR_HEAD  = '#0DFF72';
 const COLOR_BODY  = '#0DC2FF';
 const COLOR_FOOD  = '#FF0D72';
@@ -150,7 +150,7 @@ function draw() {
     ctx.fillStyle = '#000';
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-    // Grade sutil (estilo do Tetris)
+    // Grade sutil
     ctx.strokeStyle = COLOR_GRID;
     ctx.lineWidth = 0.5;
     for (let c = 0; c < COLS; c++) {
@@ -247,7 +247,8 @@ function fmt(n) {
 
 function updateUI() {
     scoreElement.innerText  = fmt(score);
-    level = Math.floor(score / 50) + 1;
+    // Nível sobe a cada 3 segmentos de cobra (tamanho inicial = 3 → nível 1)
+    level = Math.floor((snake.length - 3) / 3) + 1;
     levelElement.innerText  = level;
     lengthElement.innerText = snake.length;
 
@@ -301,11 +302,13 @@ function triggerGameOver() {
 
 // --- VELOCIDADE ---
 function getStepInterval() {
-    // Começa em 180ms, diminui conforme o nível (mín 60ms)
-    return Math.max(60, 180 - (level - 1) * 12);
+    // Intervalos fixos por nível (ms) — nível 10+ trava no último valor
+    const intervals = [250, 225, 200, 178, 158, 140, 124, 110, 100, 92];
+    const idx = Math.min(level - 1, intervals.length - 1);
+    return intervals[idx];
 }
 
-// --- LOOP  ---
+// --- LOOP (rAF para render sempre a 60fps; acumulador para lógica) ---
 let rafId       = null;
 let lastTime    = 0;
 let accumulator = 0;
