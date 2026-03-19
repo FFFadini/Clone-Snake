@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Clone Snake</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="main-container" id="main-shaker">
+
+        <div id="pop-text" class="pop-text hidden">+10!</div>
+
+        <div id="game-over-overlay" class="hidden">
+            <h1 class="neon-title">GAME OVER</h1>
+            <p>Score Final: <span id="final-score">0000</span></p>
+            <button id="restart-btn">JOGAR NOVAMENTE</button>
+        </div>
+
+        <div id="start-overlay">
+            <h1 class="neon-title start-title">COBRINHA</h1>
+            <p class="start-sub">Setas ou WASD para mover</p>
+            <button id="start-btn">INICIAR JOGO</button>
+        </div>
+
+        <div class="game-wrapper">
+            <div class="ui-panel left-panel">
+                <div class="stat-row">
+                    <span class="label">PONTOS</span>
+                    <span id="score">0000</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">NÍVEL</span>
+                    <span id="level">1</span>
+                </div>
+                <div class="stat-row">
+                    <span class="label">RECORDE</span>
+                    <span id="highscore">0000</span>
+                </div>
+            </div>
+
+            <canvas id="snake" width="400" height="400"></canvas>
+
+            <div class="ui-panel right-panel">
+                <div class="stat-row">
+                    <span class="label">TAMANHO</span>
+                    <span id="length">1</span>
+                </div>
+                <div class="controls-hint-panel">
+                    <p class="hint-title">CONTROLES</p>
+                    <p>↑ ↓ ← → Mover</p>
+                    <p>WASD Mover</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="mobile-controls">
+            <div class="dpad">
+                <div class="dpad-row">
+                    <button id="btn-up" class="control-btn">▲</button>
+                </div>
+                <div class="dpad-row">
+                    <button id="btn-left" class="control-btn">◀</button>
+                    <div class="dpad-center"></div>
+                    <button id="btn-right" class="control-btn">▶</button>
+                </div>
+                <div class="dpad-row">
+                    <button id="btn-down" class="control-btn">▼</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
